@@ -1,0 +1,41 @@
+version: '2':
+services:
+  haproxy:
+    image: haproxy:1.6.4
+    volumes:
+      - ./conf/haproxy:/usr/local/etc/haproxy # assuming you have that folder structure on your own machine
+    ports:
+      - "80:80"
+    depends_on:
+      - webappone
+      - webapptwo
+
+  webappone:
+    image: <your_web_app_one_here>:latest
+    depends_on:
+      - postgresone
+      - memcachedone
+    volumes:
+      - /path/to/my/code/on/my/dev/machine/code_for_one:/path/to/the/code/in/the/container
+    env_file: env_vars/webapp_one_env_vars.env
+
+  memcachedone:
+    image: memcached:latest
+
+  postgresone:
+    image: postgres:9.3
+
+  webapptwo:
+    image: <your_web_app_two_here>:latest
+    depends_on:
+      - postgrestwo
+      - memcachedtwo
+    volumes:
+      - /path/to/my/code/on/my/dev/machine/code_for_two:/path/to/the/code/in/the/container
+    env_file: env_vars/webapp_two_env_vars.env
+
+  memcachedtwo:
+    image: memcached:latest
+
+  postgrestwo:
+    image: postgres:9.3

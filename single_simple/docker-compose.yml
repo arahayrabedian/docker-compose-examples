@@ -1,0 +1,16 @@
+version: '2':
+
+services:
+  webapp:
+      image: <your_web_app_here>:latest
+      ports:
+        - "80:80"
+      depends_on:
+        - postgres
+        - memcached
+
+  memcached:
+    image: memcached:latest
+
+  postgres:
+    image: postgres:9.3

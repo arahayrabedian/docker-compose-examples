@@ -1,0 +1,18 @@
+version: '2':
+services:
+  webapp:
+    image: <your_web_app_here>:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - postgres
+      - memcached
+    volumes:
+     - /path/to/my/code/on/my/dev/machine:/path/to/the/code/in/the/container
+    env_file: env_vars/webapp_env_vars.env
+
+  memcached:
+    image: memcached:latest
+
+  postgres:
+    image: postgres:9.3
