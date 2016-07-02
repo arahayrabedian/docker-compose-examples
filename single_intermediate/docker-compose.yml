@@ -1,4 +1,4 @@
-version: '2':
+version: '2'
 services:
   webapp:
     image: <your_web_app_here>:latest

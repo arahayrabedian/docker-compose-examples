@@ -1,4 +1,4 @@
-version: '2':
+version: '2'
 services:
   haproxy:
     image: haproxy:1.6.4

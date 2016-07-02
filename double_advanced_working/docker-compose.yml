@@ -1,0 +1,27 @@
+version: '2'
+services:
+  haproxy:
+    image: haproxy:1.6.4
+    volumes:
+      - ./conf/haproxy:/usr/local/etc/haproxy
+    ports:
+      - "80:80"
+    depends_on:
+      - nginxred
+      - nginxgreen
+      - nginxblue
+
+  nginxred:
+    image: nginx:latest
+    volumes:
+      - ./content/nginxred:/usr/share/nginx/html:ro
+
+  nginxgreen:
+    image: nginx:latest
+    volumes:
+      - ./content/nginxgreen:/usr/share/nginx/html:ro
+
+  nginxblue:
+    image: nginx:latest
+    volumes:
+      - ./content/nginxblue:/usr/share/nginx/html:ro
